@@ -1,5 +1,6 @@
 package application;
 
+import java.util.List;
 import java.util.Scanner;
 
 import model.dao.DaoFactory;
@@ -14,9 +15,27 @@ Scanner sc = new Scanner(System.in);
 		
 		DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
 		
-		System.out.println("=== TESTE 1: seller findById ===");
+		System.out.println("=== TESTE 1: department findById ===");
 		Department department = departmentDao.findById(3);
 		System.out.println(department);
+		
+		System.out.println("\n=== TESTE 2: seller findAll ===");
+		List<Department>list = departmentDao.findAll();
+		for(Department obj : list) {
+			System.out.println(obj);
+		}
+		
+		System.out.println("\n=== TESTE 3: department insert ===");
+		Department newDepartment = new Department(null,"Disco");
+		departmentDao.insert(newDepartment);
+		System.out.println("Inserted new ID = " + newDepartment.getId());
+		
+		System.out.println("\n=== TESTE 4: department update ===");
+		department = departmentDao.findById(5);
+		department.setName("VideoGame");
+		departmentDao.update(department);
+		System.out.println("Update completed!");
+		
 		
 		sc.close();
 		
